@@ -47,9 +47,6 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Autowired
     private JwtTokenEnhancer tokenEnhancer;
 
-    @Autowired
-    private UserDetailsService detailsService;
-
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
         security.tokenKeyAccess("permitAll()").checkTokenAccess("isAuthenticated()");
@@ -61,7 +58,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                 . withClient(CLIENT_ID)
                 .secret(passwordEncoder.encode(CLIENT_SECRET))
                 .scopes("read", "white")
-                .authorizedGrantTypes("password", "refresh_token")
+                .authorizedGrantTypes("password")
                 .accessTokenValiditySeconds(JWT_DURATION)
                 .refreshTokenValiditySeconds(JWT_DURATION);
     }
@@ -74,7 +71,6 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         endpoints.authenticationManager(authenticationManager)
                 .tokenStore(tokenStore)
                 .accessTokenConverter(accessTokenConverter)
-                .tokenEnhancer(chain)
-                .userDetailsService(detailsService);
+                .tokenEnhancer(chain);
     }
 }

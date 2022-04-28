@@ -16,7 +16,7 @@ public class Movie implements Serializable {
     private String title;
     private String subTitle;
     private Integer year;
-    private String imgUri;
+    private String imgUrl;
     private String synopsis;
 
     @ManyToOne
@@ -33,7 +33,7 @@ public class Movie implements Serializable {
         this.title = title;
         this.subTitle = subTitle;
         this.year = year;
-        this.imgUri = imgUri;
+        this.imgUrl = imgUri;
         this.synopsis = synopsis;
         this.genre = genre;
     }
@@ -70,12 +70,12 @@ public class Movie implements Serializable {
         this.year = year;
     }
 
-    public String getImgUri() {
-        return imgUri;
+    public String getImgUrl() {
+        return imgUrl;
     }
 
-    public void setImgUri(String imgUri) {
-        this.imgUri = imgUri;
+    public void setImgUrl(String imgUri) {
+        this.imgUrl = imgUri;
     }
 
     public String getSynopsis() {
@@ -92,6 +92,10 @@ public class Movie implements Serializable {
 
     public void setGenre(Genre genre) {
         this.genre = genre;
+    }
+
+    public List<Review> getReviews() {
+        return reviews;
     }
 
     @Override

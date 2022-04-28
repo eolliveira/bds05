@@ -62,6 +62,19 @@ public class User implements Serializable, UserDetails {
         this.email = email;
     }
 
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return roles.stream().map(r -> new SimpleGrantedAuthority(r.getAuthority())).collect(Collectors.toList());
@@ -73,7 +86,7 @@ public class User implements Serializable, UserDetails {
 
     @Override
     public String getUsername() {
-        return null;
+        return email;
     }
 
     @Override
@@ -95,19 +108,6 @@ public class User implements Serializable, UserDetails {
     public boolean isEnabled() {
         return true;
     }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Set<Role> getRoles() {
-        return roles;
-    }
-
-    public List<Review> getReviews() {
-        return reviews;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
